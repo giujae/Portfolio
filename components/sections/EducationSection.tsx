@@ -1,5 +1,5 @@
 import { Education } from '@/lib/types';
-import { EducationCard } from './EducationCard';
+import { EducationCard } from '../EducationCard';
 
 const EDUCATION_DATA: Education[] = [
     {
@@ -38,7 +38,7 @@ const EDUCATION_DATA: Education[] = [
     // 추가 교육 데이터는 여기에 추가
 ];
 
-export function EducationList() {
+export default function EducationSection() {
     return (
         <section className="w-full py-12" id="education">
             <div className="max-w-[1200px] mx-auto px-4 md:px-6">
