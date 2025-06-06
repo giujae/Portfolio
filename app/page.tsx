@@ -2,6 +2,7 @@ import IntroSection from '@/components/sections/IntroSection';
 import TechStackSection from '@/components/sections/TechStackSection';
 import ProjectSection from '@/components/sections/ProjectSection';
 import EducationSection from '@/components/sections/EducationSection';
+import FooterSection from '@/components/sections/FooterSection';
 
 export default function Home() {
     return (
@@ -10,6 +11,7 @@ export default function Home() {
             <TechStackSection />
             <ProjectSection />
             <EducationSection />
+            <FooterSection />
         </main>
     );
 }
