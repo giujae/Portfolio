@@ -109,29 +109,29 @@ G --> H[연락처 확인 또는 외부 링크 이동]
 
 ### 4.4 프로젝트 상세 모달
 
--   **목적 / 가치:** 페이지 전환 없이 모달 내에서 마크다운 문법으로 프로젝트 설명 제공
+-   **목적 / 가치:** 페이지 전환 없이 모달 내에서 마크다운 형식의 문자열 데이터를 HTML로 렌더링하여 프로젝트 상세 정보를 제공
 -   **모듈 경로:**  
-    \`components/ProjectModal.tsx\`, \`utils/markdownRenderer.ts\`
+    `components/ProjectModal.tsx`, `components/MarkdownRenderer.tsx`
 -   **Primary Actor:** 웹사이트 방문자
 
 -   **트리거:** 프로젝트 카드의 “상세보기” 클릭
 -   **입력값:**
 
     -   프로젝트 고유 ID 또는 Key
-    -   마크다운 문자열 (.md 또는 .mdx)
+    -   마크다운 형식의 문자열 (예: `project.markdownContent`)
     -   (선택) GitHub URL, 데모 URL 등
 
 -   **처리 로직:**
 
-    1. 클릭 시 \`modalOpen: true\` 상태로 설정
-    2. 해당 프로젝트의 \`.md/.mdx\` 파일 fetch
-    3. \`remark\` + \`rehype\` 또는 \`next-mdx-remote\`로 HTML 변환
-    4. 변환된 HTML을 React로 렌더링
-    5. Framer Motion으로 애니메이션 적용
-    6. 모달 상단에 닫기 버튼, GitHub 링크 버튼 배치 (조건부)
+    1. “상세보기” 버튼 클릭 시 `modalOpen: true` 상태로 설정
+    2. 프로젝트 ID를 기준으로 DB 또는 클라이언트 상태에서 해당 프로젝트 데이터 조회
+    3. 해당 프로젝트의 `markdownContent` 필드에서 마크다운 문자열을 가져옴
+    4. `react-markdown` + `remark-gfm` 등을 사용하여 문자열을 HTML로 렌더링
+    5. Framer Motion을 통해 모달 오픈/클로즈 애니메이션 적용
+    6. 모달 상단에 닫기 버튼, GitHub/데모 링크 버튼 조건부 렌더링
 
 -   **출력값:**
-    -   마크다운 렌더링 결과 (이미지, 코드 블록 포함 가능)
+    -   마크다운 렌더링 결과 (제목, 텍스트, 이미지, 코드 블록 등 포함 가능)
     -   GitHub/데모 링크 버튼 (선택적)
 
 ---
