@@ -1,13 +1,15 @@
 import IntroSection from '@/components/sections/IntroSection';
 import TechStackSection from '@/components/sections/TechStackSection';
 import ProjectSection from '@/components/sections/ProjectSection';
+import { EducationList } from '@/components/EducationList';
 
 export default function Home() {
     return (
-        <main>
+        <main className="flex min-h-screen flex-col items-center justify-between">
             <IntroSection />
             <TechStackSection />
             <ProjectSection />
+            <EducationList />
         </main>
     );
 }
