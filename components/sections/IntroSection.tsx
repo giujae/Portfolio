@@ -11,7 +11,7 @@ export default function IntroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="container px-4 py-16 md:py-24 text-center"
+                className="container max-w-[1200px] mx-auto px-4 py-16 md:py-24 text-center"
             >
                 <h1 className="text-4xl md:text-6xl font-bold mb-4">안녕하세요, 저는 재욱입니다.</h1>
                 <p className="text-xl md:text-2xl text-muted-foreground mb-8">

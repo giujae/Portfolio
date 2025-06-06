@@ -22,7 +22,7 @@ export default function ProjectSection() {
 
     return (
         <section className="py-20">
-            <div className="container max-w-6xl mx-auto px-4">
+            <div className="container max-w-[1200px] mx-auto px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

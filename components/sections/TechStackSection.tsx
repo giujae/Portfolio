@@ -49,7 +49,7 @@ export default function TechStackSection() {
 
     return (
         <section className="py-20">
-            <div className="container max-w-5xl mx-auto px-4">
+            <div className="container max-w-[1200px] mx-auto px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export default function TechStackSection() {
                     기술 스택
                 </motion.h2>
 
-                <div className="space-y-16">
+                <div className="grid md:grid-cols-2 gap-12">
                     {Object.entries(stacksByCategory).map(([category, stacks]) => (
                         <div key={category} className="space-y-6">
                             <motion.h3
@@ -74,7 +74,7 @@ export default function TechStackSection() {
                                     variants={container}
                                     initial="hidden"
                                     animate="show"
-                                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8"
+                                    className="flex flex-wrap gap-6"
                                 >
                                     {stacks.map((tech) => (
                                         <motion.div
