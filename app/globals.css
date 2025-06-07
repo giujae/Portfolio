@@ -78,24 +78,24 @@
 }
 
 .dark {
-    --background: oklch(0.141 0.005 285.823);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.21 0.006 285.885);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.21 0.006 285.885);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.92 0.004 286.32);
-    --primary-foreground: oklch(0.21 0.006 285.885);
-    --secondary: oklch(0.274 0.006 286.033);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.274 0.006 286.033);
-    --muted-foreground: oklch(0.705 0.015 286.067);
-    --accent: oklch(0.274 0.006 286.033);
-    --accent-foreground: oklch(0.985 0 0);
+    --background: #232323;
+    --foreground: #ffffff;
+    --card: #373737;
+    --card-foreground: #ffffff;
+    --popover: #373737;
+    --popover-foreground: #ffffff;
+    --primary: #ffffff;
+    --primary-foreground: #232323;
+    --secondary: #373737;
+    --secondary-foreground: #ffffff;
+    --muted: #373737;
+    --muted-foreground: #a0a0a0;
+    --accent: #373737;
+    --accent-foreground: #ffffff;
     --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.552 0.016 285.938);
+    --border: #ffffff10;
+    --input: #ffffff15;
+    --ring: #a0a0a0;
     --chart-1: oklch(0.488 0.243 264.376);
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
@@ -128,44 +128,44 @@
 
 @layer base {
     :root {
-        --background: 0 0% 100%;
-        --foreground: 222.2 84% 4.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 84% 4.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 84% 4.9%;
-        --primary: 221.2 83.2% 53.3%;
-        --primary-foreground: 210 40% 98%;
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
+        --background: #232323;
+        --foreground: #ffffff;
+        --card: #373737;
+        --card-foreground: #ffffff;
+        --popover: #373737;
+        --popover-foreground: #ffffff;
+        --primary: #ffffff;
+        --primary-foreground: #232323;
+        --secondary: #373737;
+        --secondary-foreground: #ffffff;
+        --muted: #373737;
+        --muted-foreground: #a0a0a0;
+        --accent: #373737;
+        --accent-foreground: #ffffff;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 210 40% 98%;
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-        --ring: 221.2 83.2% 53.3%;
+        --border: #ffffff10;
+        --input: #ffffff15;
+        --ring: #a0a0a0;
         --radius: 0.5rem;
 
         /* Prism theme variables */
-        --prism-foreground: 222.2 84% 4.9%;
-        --prism-background: 210 40% 96.1%;
-        --prism-comment: 215.4 16.3% 46.9%;
-        --prism-string: 142.1 76.2% 36.3%;
-        --prism-literal: 221.2 83.2% 53.3%;
-        --prism-keyword: 221.2 83.2% 53.3%;
-        --prism-function: 142.1 76.2% 36.3%;
-        --prism-deleted: 0 84.2% 60.2%;
-        --prism-class: 291.1 64.1% 42%;
-        --prism-builtin: 291.1 64.1% 42%;
-        --prism-property: 221.2 83.2% 53.3%;
-        --prism-namespace: 291.1 64.1% 42%;
-        --prism-punctuation: 215.4 16.3% 46.9%;
-        --prism-decorator: 291.1 64.1% 42%;
-        --prism-regex: 142.1 76.2% 36.3%;
-        --prism-json-property: 221.2 83.2% 53.3%;
+        --prism-foreground: #ffffff;
+        --prism-background: #373737;
+        --prism-comment: #a0a0a0;
+        --prism-string: #98c379;
+        --prism-literal: #ffffff;
+        --prism-keyword: #c678dd;
+        --prism-function: #61afef;
+        --prism-deleted: #e06c75;
+        --prism-class: #e5c07b;
+        --prism-builtin: #e5c07b;
+        --prism-property: #61afef;
+        --prism-namespace: #e5c07b;
+        --prism-punctuation: #a0a0a0;
+        --prism-decorator: #e5c07b;
+        --prism-regex: #98c379;
+        --prism-json-property: #61afef;
     }
 
     .dark {
@@ -211,51 +211,51 @@
 
 /* 마크다운 스타일링 */
 .prose {
-    @apply text-foreground;
+    @apply text-gray-900 dark:text-gray-900;
 }
 
 .prose h1 {
-    @apply text-3xl font-bold mb-6 mt-8;
+    @apply text-3xl font-bold mb-6 mt-8 text-gray-900 dark:text-gray-900;
 }
 
 .prose h2 {
-    @apply text-2xl font-semibold mb-4 mt-6;
+    @apply text-2xl font-semibold mb-4 mt-6 text-gray-900 dark:text-gray-900;
 }
 
 .prose h3 {
-    @apply text-xl font-semibold mb-3 mt-5;
+    @apply text-xl font-semibold mb-3 mt-5 text-gray-900 dark:text-gray-900;
 }
 
 .prose h4 {
-    @apply text-lg font-semibold mb-2 mt-4;
+    @apply text-lg font-semibold mb-2 mt-4 text-gray-900 dark:text-gray-900;
 }
 
 .prose p {
-    @apply mb-4;
+    @apply mb-4 text-gray-700 dark:text-gray-700;
 }
 
 .prose ul {
-    @apply list-disc list-inside mb-4;
+    @apply list-disc list-inside mb-4 text-gray-700 dark:text-gray-700;
 }
 
 .prose ol {
-    @apply list-decimal list-inside mb-4;
+    @apply list-decimal list-inside mb-4 text-gray-700 dark:text-gray-700;
 }
 
 .prose blockquote {
-    @apply border-l-4 border-primary pl-4 italic my-4;
+    @apply border-l-4 border-gray-300 pl-4 italic my-4 text-gray-700 dark:text-gray-700;
 }
 
 .prose code:not(pre code) {
-    @apply bg-accent text-accent-foreground px-1.5 py-0.5 rounded text-sm;
+    @apply bg-gray-800 text-white dark:bg-gray-800 dark:text-white px-1.5 py-0.5 rounded text-sm;
 }
 
 .prose pre {
-    @apply bg-accent p-4 rounded-lg overflow-x-auto mb-4;
+    @apply bg-gray-800 text-white dark:bg-gray-800 dark:text-white p-4 rounded-lg overflow-x-auto mb-4;
 }
 
 .prose pre code {
-    @apply bg-transparent text-sm p-0;
+    @apply bg-transparent text-sm p-0 text-white dark:text-white;
 }
 
 .prose table {
@@ -264,30 +264,31 @@
 
 .prose th,
 .prose td {
-    @apply border border-border p-2;
+    @apply border border-gray-300 p-2 text-gray-700 dark:text-gray-700;
 }
 
 .prose th {
-    @apply bg-muted font-semibold;
+    @apply bg-gray-100 font-semibold text-gray-900 dark:text-gray-900;
 }
 
 .prose a {
-    @apply text-primary hover:underline;
+    @apply text-blue-600 dark:text-blue-600 hover:underline;
 }
 
 /* Additional styles for markdown content */
 .prose pre {
-    background-color: hsl(var(--prism-background));
+    background-color: var(--card);
     padding: 1rem;
     border-radius: 0.5rem;
     margin: 1rem 0;
 }
 
 .prose code {
-    background-color: hsl(var(--prism-background));
+    background-color: var(--card);
     padding: 0.2rem 0.4rem;
     border-radius: 0.25rem;
     font-size: 0.875em;
+    color: var(--foreground);
 }
 
 .prose pre code {
