@@ -61,6 +61,22 @@ G --> H[연락처 확인 또는 외부 링크 이동]
 
 ---
 
+### 4.1A 인터뷰 Q&A 카드 섹션
+
+-   **목적 / 가치:** 지원자의 개발 철학, 문제 해결 접근 방식, 사용자 중심 사고를 강조
+-   **모듈 경로:**  
+    \`components/InterviewCard.tsx\`
+-   **구성 요소:**
+    -   질문 텍스트 (예: "Q. 프론트엔드로 전향한 이유?")
+    -   답변 본문 (줄바꿈 포함된 텍스트)
+    -   강조 텍스트를 \`<strong>\` 또는 Tailwind 클래스(`font-bold text-accent`)로 강조
+-   **스타일:**
+    -   Tailwind + ShadCN 조합
+    -   반응형 정렬
+-   **이벤트 트리거:** 없음 (정적 정보)
+
+---
+
 ### 4.2 기술 스택 섹션
 
 -   **목적 / 가치:** 보유 기술을 시각적 아이콘으로 한눈에 전달
@@ -109,30 +125,49 @@ G --> H[연락처 확인 또는 외부 링크 이동]
 
 ### 4.4 프로젝트 상세 모달
 
--   **목적 / 가치:** 페이지 전환 없이 모달 내에서 마크다운 형식의 문자열 데이터를 HTML로 렌더링하여 프로젝트 상세 정보를 제공
+-   **목적 / 가치:** 페이지 전환 없이 모달 내에서 마크다운 형식의 문자열 데이터를 HTML로 렌더링하여 프로젝트 상세 정보를 제공하며, 시각적으로 돋보이는 커버 구성으로 첫인상 강화
 -   **모듈 경로:**  
-    `components/ProjectModal.tsx`, `components/MarkdownRenderer.tsx`
+    `components/ProjectModal.tsx`, `components/MarkdownRenderer.tsx`, `components/ProjectCover.tsx`
 -   **Primary Actor:** 웹사이트 방문자
 
--   **트리거:** 프로젝트 카드의 “상세보기” 클릭
 -   **입력값:**
 
     -   프로젝트 고유 ID 또는 Key
-    -   마크다운 형식의 문자열 (예: `project.markdownContent`)
+    -   `markdownContent`: 마크다운 형식의 문자열
+    -   `coverImageUrl`: 프로젝트 상단에 표시될 커버 이미지 URL
+    -   `coverColor`: 커버 배경 색상 (예: `#dd1d1d` 또는 `bg-red-600`)
     -   (선택) GitHub URL, 데모 URL 등
+
+-   **구성 요소:**
+
+    1. **상단 커버**
+        - 배경 색상 지정 가능 (`bg-[color]`)
+        - 커버 이미지 (ex. 프로젝트 완성 화면 mockup)
+        - 프로젝트 제목, 역할(솔로/팀), 기간 정보 텍스트
+    2. **본문 마크다운 콘텐츠**
+        - `react-markdown` + `remark-gfm`으로 렌더링
+        - 이미지, 코드 블록, 제목 등 마크다운 요소 지원
+    3. **하단 버튼 및 링크**
+        - GitHub, 데모 버튼 조건부 렌더링
+        - 닫기 버튼
 
 -   **처리 로직:**
 
-    1. “상세보기” 버튼 클릭 시 `modalOpen: true` 상태로 설정
-    2. 프로젝트 ID를 기준으로 DB 또는 클라이언트 상태에서 해당 프로젝트 데이터 조회
-    3. 해당 프로젝트의 `markdownContent` 필드에서 마크다운 문자열을 가져옴
-    4. `react-markdown` + `remark-gfm` 등을 사용하여 문자열을 HTML로 렌더링
-    5. Framer Motion을 통해 모달 오픈/클로즈 애니메이션 적용
-    6. 모달 상단에 닫기 버튼, GitHub/데모 링크 버튼 조건부 렌더링
+    1. “상세보기” 버튼 클릭 시 `modalOpen: true`
+    2. ID 기준으로 프로젝트 데이터를 조회
+    3. 커버 영역 구성 (`coverColor`, `coverImageUrl`)
+    4. 마크다운 본문 렌더링
+    5. 버튼/링크 표시
+    6. Framer Motion으로 모달 등장 애니메이션
 
 -   **출력값:**
-    -   마크다운 렌더링 결과 (제목, 텍스트, 이미지, 코드 블록 등 포함 가능)
-    -   GitHub/데모 링크 버튼 (선택적)
+
+    -   커버 + 마크다운 기반 본문 + 링크 버튼
+    -   전체가 반응형 레이아웃으로 구성
+
+-   **반응형 고려사항:**
+    -   커버 이미지 비율 유지 (`aspect-[...]`)
+    -   모바일에서 제목/설명 위치 자동 정렬
 
 ---
 
@@ -166,13 +201,40 @@ G --> H[연락처 확인 또는 외부 링크 이동]
 
 ---
 
-### 4.6 연락처 / Footer
+### 4.6 마무리 / Footer 섹션
 
--   **목적 / 가치:** 이메일, GitHub 등 커뮤니케이션 경로 제공
+-   **목적 / 가치:** 포트폴리오의 종료 지점을 부드럽게 전달하고, 외부 채널(GitHub, Velog 등)로 자연스럽게 유도
+-   **모듈 경로:**  
+    `components/sections/FooterSection.tsx`
+-   **Primary Actor:** 웹사이트 방문자
+
 -   **구성 요소:**
-    -   이메일 (\`mailto:\`)
-    -   GitHub, 블로그, LinkedIn 등 소셜 링크
-    -   저작권 텍스트: \`© 2025 JaeUk. All rights reserved.\`
+
+    -   대형 Thank You 텍스트 (영문)
+    -   한글 메시지: “봐주셔서 감사합니다 :)”
+    -   간단한 자기소개/개발 철학 문장
+        -   예: “프론트엔드 개발자로 성장하기 위해 낮선 기술에도 적극적으로 도전하고...”
+    -   외부 링크 버튼 2개
+        -   GitHub
+        -   Velog
+    -   하단 저작권 텍스트
+        -   예: “Copyright 2023. chojieun all rights reserved.”
+    -   기술 기반 설명 (React, Styled Components, Tailwind CSS)
+
+-   **스타일링:**
+
+    -   배경: 연한 마블 질감 이미지 또는 배경색 (`bg-[url('/marble.jpg')]`)
+    -   중앙 정렬, 대형 텍스트 대비 강조
+    -   버튼은 하단 라인 강조 (`border-b`) 스타일
+    -   Tailwind 기준 `text-center`, `font-light`, `tracking-wide` 등 활용
+
+-   **이벤트 트리거:**
+
+    -   GitHub / Velog 버튼 클릭 → 새 탭 링크 이동
+    -   오른쪽 하단 floating 버튼 (메일, 블로그, 스크롤 업)
+
+-   **반응형 대응:**
+    -   모바일/태블릿 환경에서도 폰트 크기 및 버튼 정렬 최적화
 
 ---
 
