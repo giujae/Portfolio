@@ -1,53 +1,148 @@
 'use client';
 
+import { Project } from '@/lib/api/projects';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { MarkdownRenderer } from './MarkdownRenderer';
-import { Project } from '@/lib/constants/projects';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, X } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
 
-interface ProjectModalProps {
-    project: Project & { markdownContent?: string };
+type ProjectModalProps = {
     isOpen: boolean;
     onClose: () => void;
-}
+    project: Project;
+};
 
-export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="max-w-3xl h-[80vh] flex flex-col">
-                <DialogHeader className="flex-shrink-0">
-                    <DialogTitle className="text-2xl font-bold">{project.title}</DialogTitle>
-                    <div className="flex gap-2 mt-2">
-                        {project.repoUrl && (
-                            <Button variant="outline" size="sm" onClick={() => window.open(project.repoUrl, '_blank')}>
-                                <Github className="w-4 h-4 mr-2" />
-                                GitHub
-                            </Button>
-                        )}
-                        {project.demoUrl && (
-                            <Button variant="outline" size="sm" onClick={() => window.open(project.demoUrl, '_blank')}>
-                                <ExternalLink className="w-4 h-4 mr-2" />
-                                데모 보기
-                            </Button>
-                        )}
-                    </div>
-                </DialogHeader>
+            <DialogContent className="max-w-[80vw] max-h-[90vh] overflow-y-auto bg-white dark:bg-white [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] p-0 border-0">
+                <DialogTitle className="sr-only">{project.title} 프로젝트 상세 정보</DialogTitle>
 
-                <div className="flex-1 overflow-y-auto mt-4 pr-2">
-                    {project.markdownContent ? (
-                        <MarkdownRenderer content={project.markdownContent} />
-                    ) : (
-                        <p className="text-muted-foreground">{project.description}</p>
+                {/* Action Buttons - Moved inside the cover section */}
+                <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+                    {project.repo_url && (
+                        <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => window.open(project.repo_url, '_blank')}
+                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                        >
+                            <Github className="w-4 h-4 text-white" />
+                            <span className="sr-only">GitHub</span>
+                        </Button>
                     )}
+                    {project.demo_url && (
+                        <Button
+                            size="icon"
+                            variant="outline"
+                            onClick={() => window.open(project.demo_url, '_blank')}
+                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                        >
+                            <ExternalLink className="w-4 h-4 text-white" />
+                            <span className="sr-only">Demo</span>
+                        </Button>
+                    )}
+                    <Button
+                        size="icon"
+                        variant="outline"
+                        onClick={onClose}
+                        className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                    >
+                        <X className="w-4 h-4 text-white" />
+                        <span className="sr-only">Close</span>
+                    </Button>
                 </div>
 
-                <div className="flex-shrink-0 mt-4 pt-4 border-t flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                        <span key={tech} className="px-2 py-1 text-sm bg-secondary rounded-md">
-                            {tech}
-                        </span>
-                    ))}
+                {/* Project Cover */}
+                <div className="relative">
+                    {/* Color Background */}
+                    <div
+                        className="absolute inset-x-0 top-0 h-[300px] md:h-[500px]"
+                        style={{ backgroundColor: project.cover_color || '#f3f4f6' }}
+                    />
+
+                    {/* Content Container */}
+                    <div className="relative pt-16 md:pt-20 px-6">
+                        {/* Project Info */}
+                        <div className="text-white mb-1 text-center">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-4">{project.title}</h2>
+                            <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-sm">
+                                <span className="px-3 py-1.5 rounded-full bg-white/20">
+                                    {project.role === 'solo' ? '개인 프로젝트' : '팀 프로젝트'}
+                                </span>
+                                <span className="text-white/80">
+                                    {project.period.start} ~ {project.period.end}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Project Cover Image */}
+                        {project.cover_image_url && (
+                            <div className="relative w-[90%] md:w-[60%] mx-auto aspect-video rounded-lg overflow-hidden shadow-2xl translate-y-6 md:translate-y-10">
+                                <Image
+                                    src={project.cover_image_url}
+                                    alt={`${project.title} cover`}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Project Content */}
+                <div className="w-full lg:w-[70%] mx-auto px-6 pt-5 md:pt-32 pb-16">
+                    <div className="prose prose-sm w-full max-w-full [&_pre]:!whitespace-pre-wrap [&_pre]:break-words [&_img]:w-full [&_table]:w-full [&_table]:block [&_table]:overflow-x-auto !text-gray-900 dark:!text-gray-900">
+                        {project.markdown_content ? (
+                            <ReactMarkdown
+                                remarkPlugins={[remarkGfm]}
+                                components={{
+                                    img: (props) => <img {...props} className="w-full h-auto object-cover" />,
+                                    pre: (props) => (
+                                        <pre
+                                            {...props}
+                                            className="!whitespace-pre-wrap !break-words !bg-gray-800 !text-white dark:!bg-gray-800 dark:!text-white"
+                                        />
+                                    ),
+                                    code: (props) => (
+                                        <code
+                                            {...props}
+                                            className="!break-words !whitespace-pre-wrap !bg-gray-800 !text-white dark:!bg-gray-800 dark:!text-white"
+                                        />
+                                    ),
+                                    p: (props) => <p {...props} className="!text-gray-700 dark:!text-gray-700" />,
+                                    h1: (props) => <h1 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    h2: (props) => <h2 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    h3: (props) => <h3 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    h4: (props) => <h4 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    h5: (props) => <h5 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    h6: (props) => <h6 {...props} className="!text-gray-900 dark:!text-gray-900" />,
+                                    ul: (props) => <ul {...props} className="!text-gray-700 dark:!text-gray-700" />,
+                                    ol: (props) => <ol {...props} className="!text-gray-700 dark:!text-gray-700" />,
+                                    li: (props) => <li {...props} className="!text-gray-700 dark:!text-gray-700" />,
+                                    blockquote: (props) => (
+                                        <blockquote
+                                            {...props}
+                                            className="!text-gray-700 dark:!text-gray-700 !border-l-4 !border-gray-300"
+                                        />
+                                    ),
+                                    table: (props) => (
+                                        <table {...props} className="!text-gray-700 dark:!text-gray-700" />
+                                    ),
+                                    th: (props) => (
+                                        <th {...props} className="!text-gray-900 dark:!text-gray-900 !bg-gray-100" />
+                                    ),
+                                    td: (props) => <td {...props} className="!text-gray-700 dark:!text-gray-700" />,
+                                }}
+                            >
+                                {project.markdown_content}
+                            </ReactMarkdown>
+                        ) : (
+                            <p className="!text-gray-500 dark:!text-gray-500">상세 내용이 없습니다.</p>
+                        )}
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>
