@@ -1,12 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ProjectCard from '@/components/ProjectCard';
-import ProjectModal from '@/components/ProjectModal';
-import ProjectCardSkeleton from '@/components/ProjectCardSkeleton';
+import ProjectCard from '@/components/project/ProjectCard';
+import ProjectModal from '@/components/project/ProjectModal';
+import ProjectCardSkeleton from '@/components/project/ProjectCardSkeleton';
 import { Project, getProjects } from '@/lib/api/projects';
-import { useEffect } from 'react';
 
 const containerVariants = {
     hidden: { opacity: 0 },

@@ -2,10 +2,10 @@
 
 import { motion } from 'framer-motion';
 import { Education } from '@/lib/types';
-import { EducationCard } from '../EducationCard';
+import { EducationCard } from '@/components/education/EducationCard';
 import { useEffect, useState } from 'react';
 import { getEducations } from '@/lib/api';
-import EducationCardSkeleton from '../EducationCardSkeleton';
+import EducationCardSkeleton from '@/components/education/EducationCardSkeleton';
 
 const containerVariants = {
     hidden: { opacity: 0 },

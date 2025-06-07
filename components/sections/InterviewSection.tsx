@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import InterviewCard from '@/components/InterviewCard';
+import InterviewCard from '@/components/interview/InterviewCard';
 import { INTERVIEWS } from '@/lib/constants/interviews';
 
 const containerVariants = {
