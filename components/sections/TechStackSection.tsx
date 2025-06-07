@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 const container = {
     hidden: { opacity: 0 },
-    show: {
+    visible: {
         opacity: 1,
         transition: {
             staggerChildren: 0.1,
@@ -17,7 +17,7 @@ const container = {
 
 const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 },
 };
 
 const iconMap: Record<string, string> = {
@@ -52,7 +52,8 @@ export default function TechStackSection() {
             <div className="container max-w-[1200px] mx-auto px-4">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ amount: 0.3 }}
                     className="text-3xl md:text-4xl font-bold mb-12"
                 >
                     기술 스택
@@ -63,7 +64,8 @@ export default function TechStackSection() {
                         <div key={category} className="space-y-6">
                             <motion.h3
                                 initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ amount: 0.3 }}
                                 className="text-2xl font-bold"
                             >
                                 {categories[category as keyof typeof categories]}
@@ -73,14 +75,15 @@ export default function TechStackSection() {
                                 <motion.div
                                     variants={container}
                                     initial="hidden"
-                                    animate="show"
+                                    whileInView="visible"
+                                    viewport={{ amount: 0.3 }}
                                     className="flex flex-wrap gap-6"
                                 >
                                     {stacks.map((tech) => (
                                         <motion.div
                                             key={tech.name}
                                             variants={item}
-                                            className="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-accent transition-colors"
+                                            className="flex flex-col items-center justify-center p-4 rounded-lg bg-[#373737] hover:bg-[#474747] transition-colors"
                                         >
                                             <Tooltip>
                                                 <TooltipTrigger>
