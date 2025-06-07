@@ -9,3 +9,9 @@ export interface Education {
     description?: string;
     tags?: string[];
 }
+
+export interface Interview {
+    id: string;
+    question: string;
+    answer: string;
+}
