@@ -1,52 +1,92 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { Education } from '@/lib/types';
 import { EducationCard } from '../EducationCard';
+import { useEffect, useState } from 'react';
+import { getEducations } from '@/lib/api';
+import EducationCardSkeleton from '../EducationCardSkeleton';
 
-const EDUCATION_DATA: Education[] = [
-    {
-        id: '1',
-        title: '멋쟁이사자처럼 프론트엔드 스쿨 5기',
-        institution: '멋쟁이사자처럼',
-        period: {
-            start: '2023.01',
-            end: '2023.06',
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
         },
-        description: '프론트엔드 개발자 양성 교육 과정',
-        tags: ['React', 'JavaScript', 'HTML/CSS'],
     },
-    {
-        id: '2',
-        title: '코드스테이츠 Advanced 과정',
-        institution: '코드스테이츠',
-        period: {
-            start: '2023.07',
-            end: '2023.12',
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
         },
-        description: '프론트엔드 심화 학습 및 실전 프로젝트 수행',
-        tags: ['TypeScript', 'Next.js', 'Testing', 'CI/CD'],
     },
-    {
-        id: '3',
-        title: 'AWS Cloud Practitioner 과정',
-        institution: 'AWS Training and Certification',
-        period: {
-            start: '2024.01',
-            end: '2024.03',
-        },
-        description: 'AWS 클라우드 기초 및 실습 교육',
-        tags: ['AWS', 'Cloud Computing', 'DevOps'],
-    },
-    // 추가 교육 데이터는 여기에 추가
-];
+};
 
 export default function EducationSection() {
+    const [educations, setEducations] = useState<Education[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchEducations() {
+            try {
+                const data = await getEducations();
+                setEducations(data);
+            } catch (error) {
+                console.error('Failed to fetch educations:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        fetchEducations();
+    }, []);
+
     return (
-        <section className="w-full py-12" id="education">
-            <div className="max-w-[1200px] mx-auto px-4 md:px-6">
-                <h2 className="text-3xl font-bold tracking-tighter mb-8">교육 이수내역</h2>
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {EDUCATION_DATA.map((education) => (
-                        <EducationCard key={education.id} education={education} />
-                    ))}
+        <section className="py-20" id="education">
+            <div className="container max-w-[1200px] mx-auto px-4">
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ amount: 0.3 }}
+                    className="text-3xl md:text-4xl font-bold mb-12"
+                >
+                    교육 이수내역
+                </motion.h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {isLoading ? (
+                        <>
+                            <EducationCardSkeleton />
+                            <EducationCardSkeleton />
+                            <EducationCardSkeleton />
+                        </>
+                    ) : (
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ amount: 0.3 }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 col-span-full"
+                        >
+                            {educations.map((education) => (
+                                <motion.div
+                                    key={education.id}
+                                    variants={itemVariants}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ amount: 0.3 }}
+                                >
+                                    <EducationCard education={education} />
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    )}
                 </div>
             </div>
         </section>
