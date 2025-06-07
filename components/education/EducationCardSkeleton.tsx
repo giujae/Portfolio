@@ -1,7 +1,7 @@
 'use client';
 
-import { Skeleton } from './ui/skeleton';
-import { Card, CardHeader, CardContent, CardFooter } from './ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 
 export default function EducationCardSkeleton() {
     return (

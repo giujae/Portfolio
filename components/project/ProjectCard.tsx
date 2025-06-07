@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Project } from '@/lib/api/projects';
-import ProjectModal from './ProjectModal';
-import { Button } from './ui/button';
+import ProjectModal from '@/components/project/ProjectModal';
+import { Button } from '@/components/ui/button';
 import { ExternalLink, Github } from 'lucide-react';
 
 type ProjectCardProps = {
