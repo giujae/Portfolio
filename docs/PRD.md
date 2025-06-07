@@ -125,49 +125,82 @@ G --> H[연락처 확인 또는 외부 링크 이동]
 
 ### 4.4 프로젝트 상세 모달
 
--   **목적 / 가치:** 페이지 전환 없이 모달 내에서 마크다운 형식의 문자열 데이터를 HTML로 렌더링하여 프로젝트 상세 정보를 제공하며, 시각적으로 돋보이는 커버 구성으로 첫인상 강화
+-   **목적 / 가치:** 페이지 전환 없이 프로젝트 상세 내용을 시각적으로 풍부하게 제공하며, 관련 문서/포스트를 바로 참조할 수 있는 기능 제공
 -   **모듈 경로:**  
-    `components/ProjectModal.tsx`, `components/MarkdownRenderer.tsx`, `components/ProjectCover.tsx`
+    `components/ProjectModal.tsx`,  
+    `components/MarkdownRenderer.tsx`,  
+    `components/ProjectCover.tsx`,  
+    `components/ImageGallery.tsx`,  
+    `components/RelatedDrawer.tsx`
+
 -   **Primary Actor:** 웹사이트 방문자
 
--   **입력값:**
+---
 
-    -   프로젝트 고유 ID 또는 Key
-    -   `markdownContent`: 마크다운 형식의 문자열
-    -   `coverImageUrl`: 프로젝트 상단에 표시될 커버 이미지 URL
-    -   `coverColor`: 커버 배경 색상 (예: `#dd1d1d` 또는 `bg-red-600`)
-    -   (선택) GitHub URL, 데모 URL 등
+#### 📥 입력값
 
--   **구성 요소:**
+-   `projectId`: 프로젝트 고유 ID
+-   `markdownContent`: 마크다운 형식의 설명 문자열
+-   `coverImageUrl`: 커버 이미지 URL
+-   `coverColor`: 배경 색상 코드 (예: `#ff1e1e`)
+-   `galleryImages`: 작업 화면 이미지 배열 (썸네일 + 원본 URL)
+-   `relatedLinks`: 블로그 글 또는 기술 문서 링크 배열
+    ```ts
+    type RelatedLink = {
+        title: string;
+        url: string;
+    };
+    ```
 
-    1. **상단 커버**
-        - 배경 색상 지정 가능 (`bg-[color]`)
-        - 커버 이미지 (ex. 프로젝트 완성 화면 mockup)
-        - 프로젝트 제목, 역할(솔로/팀), 기간 정보 텍스트
-    2. **본문 마크다운 콘텐츠**
-        - `react-markdown` + `remark-gfm`으로 렌더링
-        - 이미지, 코드 블록, 제목 등 마크다운 요소 지원
-    3. **하단 버튼 및 링크**
-        - GitHub, 데모 버튼 조건부 렌더링
-        - 닫기 버튼
+---
 
--   **처리 로직:**
+#### 🧩 구성 요소
 
-    1. “상세보기” 버튼 클릭 시 `modalOpen: true`
-    2. ID 기준으로 프로젝트 데이터를 조회
-    3. 커버 영역 구성 (`coverColor`, `coverImageUrl`)
-    4. 마크다운 본문 렌더링
-    5. 버튼/링크 표시
-    6. Framer Motion으로 모달 등장 애니메이션
+1. **상단 커버**
 
--   **출력값:**
+    - 배경 색상 + 커버 이미지
+    - 프로젝트 정보 (제목, 참여 방식, 기간 등)
 
-    -   커버 + 마크다운 기반 본문 + 링크 버튼
-    -   전체가 반응형 레이아웃으로 구성
+2. **본문 마크다운 콘텐츠**
 
--   **반응형 고려사항:**
-    -   커버 이미지 비율 유지 (`aspect-[...]`)
-    -   모바일에서 제목/설명 위치 자동 정렬
+    - `react-markdown` + `remark-gfm`으로 마크다운 렌더링
+
+3. **작업 이미지 갤러리**
+
+    - 썸네일 나열 후 클릭 시 확대 보기 (Lightbox)
+
+4. **관련 링크 드로어**
+
+    - 화면 우측 상단 버튼 그룹 중에 “관련 링크” 버튼 고정
+    - 클릭 시 사이드 드로어(`<Drawer>`) 오픈
+    - 리스트 형식으로 외부 링크 및 제목 노출
+    - 각 항목 클릭 시 새 탭으로 이동
+    - 드로어 닫기 기능 포함
+    - 예시 제목: "다크모드 구현하기", "URLSearchParams 활용하기" 등
+
+5. **기타 버튼**
+    - GitHub / 데모 버튼 (조건부 렌더링)
+    - 모달 닫기 버튼
+
+---
+
+#### ⚙️ 처리 로직
+
+1. 프로젝트 상세 버튼 클릭 → 모달 오픈
+2. 프로젝트 ID 기반 데이터 fetch
+3. 마크다운 본문 및 커버 렌더링
+4. `relatedLinks`가 존재할 경우 → 관련 블로그 버튼 표시
+5. 클릭 시 `<Drawer>` 컴포넌트 열기
+6. 리스트 항목 클릭 시 `target="_blank"`로 외부 이동
+7. 갤러리 및 GitHub 버튼 기능 포함
+
+---
+
+#### 📱 반응형 고려사항
+
+-   드로어는 모바일에서 전체 화면 슬라이드로 전환
+-   이미지 썸네일은 그리드 형태로 줄 바꿈
+-   GitHub 버튼/블로그 버튼은 하단 고정 또는 FAB 스타일
 
 ---
 
