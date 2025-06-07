@@ -1,6 +1,6 @@
 import { supabase } from '@/lib/supabase/client';
 
-export type Project = {
+export interface Project {
     id: string;
     title: string;
     description: string;
@@ -18,7 +18,12 @@ export type Project = {
         start: string;
         end: string;
     };
-};
+    gallery_images?: {
+        url: string;
+        description?: string;
+    }[];
+    related_links?: { title: string; url: string }[];
+}
 
 export async function getProjects(): Promise<Project[]> {
     const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
@@ -28,15 +33,25 @@ export async function getProjects(): Promise<Project[]> {
         return [];
     }
 
-    return (
-        data.map((project) => ({
-            ...project,
-            period: {
-                start: project.period_start,
-                end: project.period_end,
-            },
-        })) || []
-    );
+    return data.map((project) => ({
+        id: project.id,
+        title: project.title,
+        description: project.description,
+        thumbnail: project.thumbnail,
+        tech_stack: project.tech_stack,
+        repo_url: project.repo_url,
+        demo_url: project.demo_url,
+        markdown_content: project.markdown_content,
+        cover_image_url: project.cover_image_url,
+        cover_color: project.cover_color,
+        role: project.role,
+        period: {
+            start: project.period_start.substring(0, 7), // YYYY-MM
+            end: project.period_end.substring(0, 7), // YYYY-MM
+        },
+        gallery_images: project.gallery_images || [],
+        related_links: project.related_links || [],
+    }));
 }
 
 export async function getProjectById(id: string): Promise<Project | null> {
@@ -52,8 +67,8 @@ export async function getProjectById(id: string): Promise<Project | null> {
     return {
         ...data,
         period: {
-            start: data.period_start,
-            end: data.period_end,
+            start: data.period_start.substring(0, 7), // YYYY-MM
+            end: data.period_end.substring(0, 7), // YYYY-MM
         },
     };
 }
