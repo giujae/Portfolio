@@ -132,7 +132,7 @@ export default function IntroSection() {
                             className="absolute top-6 left-6 flex gap-4"
                         >
                             <a
-                                href="https://github.com/yourusername"
+                                href="https://github.com/giujae"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
@@ -140,7 +140,7 @@ export default function IntroSection() {
                                 GitHub
                             </a>
                             <a
-                                href="https://velog.io/@yourusername"
+                                href="https://giujae.github.io/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
