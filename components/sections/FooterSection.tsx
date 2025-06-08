@@ -67,7 +67,7 @@ export default function FooterSection() {
                                 className="flex gap-12"
                             >
                                 <a
-                                    href="https://github.com/chojieun"
+                                    href="https://github.com/giujae"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
@@ -75,7 +75,7 @@ export default function FooterSection() {
                                     GitHub
                                 </a>
                                 <a
-                                    href="https://velog.io/@chojieun"
+                                    href="https://giujae.github.io/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
