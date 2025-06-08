@@ -26,7 +26,7 @@ export interface Project {
 }
 
 export async function getProjects(): Promise<Project[]> {
-    const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('projects').select('*').order('period_start', { ascending: false });
 
     if (error) {
         console.error('Error fetching projects:', error);
