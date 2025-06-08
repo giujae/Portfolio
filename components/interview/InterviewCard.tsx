@@ -17,7 +17,7 @@ export default function InterviewCard({ interview }: InterviewCardProps) {
             viewport={{ amount: 0.3 }}
             transition={{ duration: 0.5 }}
         >
-            <Card className="min-h-[300px] h-full hover:shadow-lg transition-shadow duration-200">
+            <Card className="min-h-[340px] h-full hover:shadow-lg transition-shadow duration-200">
                 <CardContent className="pt-6">
                     <h3 className="text-xl font-semibold mb-4 !text-white">{interview.question}</h3>
                     <div
