@@ -21,7 +21,7 @@ export default function FooterSection() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ amount: 0.2 }}
+                            viewport={{ once: true, amount: 0.2 }}
                             transition={{ duration: 0.7 }}
                             className="flex flex-col items-center gap-8 text-center w-full max-w-[85vw] md:max-w-3xl"
                         >
@@ -29,7 +29,7 @@ export default function FooterSection() {
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ amount: 0.2 }}
+                                viewport={{ once: true, amount: 0.2 }}
                                 transition={{ duration: 0.7, delay: 0.2 }}
                                 className="relative"
                             >
@@ -48,7 +48,7 @@ export default function FooterSection() {
                             <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ amount: 0.2 }}
+                                viewport={{ once: true, amount: 0.2 }}
                                 transition={{ duration: 0.7, delay: 0.4 }}
                                 className="text-[12px] sm:text-lg md:text-xl text-center whitespace-nowrap mt-16 px-4"
                                 style={{ color: '#373737' }}
@@ -62,7 +62,7 @@ export default function FooterSection() {
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ amount: 0.2 }}
+                                viewport={{ once: true, amount: 0.2 }}
                                 transition={{ duration: 0.7, delay: 0.6 }}
                                 className="flex gap-12"
                             >
@@ -91,7 +91,7 @@ export default function FooterSection() {
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    viewport={{ amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.7, delay: 0.8 }}
                     className="w-full border-t border-border/40 mt-auto"
                 >

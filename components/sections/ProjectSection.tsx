@@ -54,7 +54,7 @@ export default function ProjectSection() {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="text-3xl md:text-4xl font-bold mb-12"
                 >
                     프로젝트
@@ -72,7 +72,7 @@ export default function ProjectSection() {
                             variants={containerVariants}
                             initial="hidden"
                             whileInView="visible"
-                            viewport={{ amount: 0.3 }}
+                            viewport={{ once: true, amount: 0.3 }}
                             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 col-span-full"
                         >
                             {projects.map((project) => (
@@ -81,7 +81,7 @@ export default function ProjectSection() {
                                     variants={itemVariants}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.3 }}
                                 >
                                     <ProjectCard project={project} />
                                 </motion.div>

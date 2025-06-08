@@ -53,7 +53,7 @@ export default function TechStackSection() {
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     className="text-3xl md:text-4xl font-bold mb-12"
                 >
                     기술 스택
@@ -65,7 +65,7 @@ export default function TechStackSection() {
                             <motion.h3
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ amount: 0.3 }}
+                                viewport={{ once: true, amount: 0.3 }}
                                 className="text-2xl font-bold"
                             >
                                 {categories[category as keyof typeof categories]}
@@ -76,7 +76,7 @@ export default function TechStackSection() {
                                     variants={container}
                                     initial="hidden"
                                     whileInView="visible"
-                                    viewport={{ amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.3 }}
                                     className="flex flex-wrap gap-6"
                                 >
                                     {stacks.map((tech) => (

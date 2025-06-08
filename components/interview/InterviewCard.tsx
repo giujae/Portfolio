@@ -14,10 +14,10 @@ export default function InterviewCard({ interview }: InterviewCardProps) {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5 }}
         >
-            <Card className="min-h-[340px] h-full hover:shadow-lg transition-shadow duration-200">
+            <Card className="min-h-[340px] h-full hover:shadow-lg transition-shadow duration-200 border-none">
                 <CardContent className="pt-6">
                     <h3 className="text-xl font-semibold mb-4 !text-white">{interview.question}</h3>
                     <div
