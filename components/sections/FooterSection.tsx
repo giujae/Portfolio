@@ -70,7 +70,7 @@ export default function FooterSection() {
                                     href="https://github.com/giujae"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
+                                    className="text-gray-600 border-b-4 border-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-200 px-2"
                                 >
                                     GitHub
                                 </a>
@@ -78,7 +78,7 @@ export default function FooterSection() {
                                     href="https://giujae.github.io/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-600 hover:text-gray-900 transition-colors duration-200 border-b-4 border-gray-800"
+                                    className="text-gray-600 border-b-4 border-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-200 px-2"
                                 >
                                     Blog
                                 </a>

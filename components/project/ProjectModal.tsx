@@ -29,7 +29,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                             size="icon"
                             variant="outline"
                             onClick={() => window.open(project.repo_url, '_blank')}
-                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200 cursor-pointer"
                         >
                             <Github className="w-4 h-4 text-white" />
                             <span className="sr-only">GitHub</span>
@@ -43,7 +43,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                             size="icon"
                             variant="outline"
                             onClick={() => window.open(project.demo_url, '_blank')}
-                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                            className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200 cursor-pointer"
                         >
                             <ExternalLink className="w-4 h-4 text-white" />
                             <span className="sr-only">Demo</span>
@@ -53,7 +53,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                         size="icon"
                         variant="outline"
                         onClick={onClose}
-                        className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200"
+                        className="text-white border-white/20 bg-black/20 hover:bg-black/30 hover:scale-110 transition-all duration-200 cursor-pointer"
                     >
                         <X className="w-4 h-4 text-white" />
                         <span className="sr-only">Close</span>

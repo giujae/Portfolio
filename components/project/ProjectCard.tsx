@@ -50,6 +50,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 >
                     <Button
                         variant="secondary"
+                        className="hover:bg-zinc-300/80 cursor-pointer"
                         onClick={(e) => {
                             e.stopPropagation();
                             setIsModalOpen(true);
@@ -60,6 +61,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     {project.repo_url && (
                         <Button
                             variant="secondary"
+                            className="hover:bg-zinc-300/80 cursor-pointer"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 window.open(project.repo_url, '_blank');
@@ -72,6 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     {project.demo_url && (
                         <Button
                             variant="secondary"
+                            className="hover:bg-secondary/80 cursor-pointer"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 window.open(project.demo_url, '_blank');
