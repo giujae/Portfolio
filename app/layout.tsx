@@ -15,6 +15,28 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: '정재욱의 포트폴리오',
     description: '정재욱의 프론트엔드 웹 포트폴리오 입니다.',
+    openGraph: {
+        title: '정재욱의 포트폴리오',
+        description: '정재욱의 프론트엔드 웹 포트폴리오 입니다.',
+        type: 'website',
+        locale: 'ko_KR',
+        url: 'https://portfolio-oxpx7fhai-giujaes-projects.vercel.app',
+        siteName: '정재욱의 포트폴리오',
+        images: [
+            {
+                url: '/og-image.png', // OG 이미지 경로
+                width: 1200,
+                height: 630,
+                alt: '정재욱의 포트폴리오',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: '정재욱의 포트폴리오',
+        description: '정재욱의 프론트엔드 웹 포트폴리오 입니다.',
+        images: ['/og-image.png'], // Twitter 카드 이미지
+    },
 };
 
 export default function RootLayout({
@@ -23,7 +45,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="ko">
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>{children}</body>
         </html>
     );
