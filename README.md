@@ -24,20 +24,32 @@ AI가 프론트엔드 개발에 생각보다 빠르게 영향을 미치고 있�
 
 ## 서비스 사진 📸
 
-인트로 화면
-![intro](https://github.com/user-attachments/assets/dcf1fcf6-afd9-4fa7-bef5-8430f9cce469)
-
-인터뷰/기술스택 화면
-![interview/stacks](https://github.com/user-attachments/assets/3a952c9b-63e0-4c03-931e-2c9b9a2e0cc3)
-
-프로젝트/교육이수내역 화면
-![project/education](https://github.com/user-attachments/assets/533a58ea-c419-4b84-978f-3d325bea8fbe)
-
-프로젝트 상세 화면
-![project-detail](https://github.com/user-attachments/assets/8a882ac0-787a-43a1-82a8-be63ec55801b)
-
-푸터 화면
-![footer](https://github.com/user-attachments/assets/3d9d477e-6c73-476e-a187-2b508697d0b4)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/dcf1fcf6-afd9-4fa7-bef5-8430f9cce469" width="250"/><br/>
+      <sub>인트로 화면</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/3a952c9b-63e0-4c03-931e-2c9b9a2e0cc3" width="250"/><br/>
+      <sub>인터뷰/기술스택 화면</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/533a58ea-c419-4b84-978f-3d325bea8fbe" width="250"/><br/>
+      <sub>프로젝트/교육이수내역 화면</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/8a882ac0-787a-43a1-82a8-be63ec55801b" width="250"/><br/>
+      <sub>프로젝트 상세 화면</sub>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/3d9d477e-6c73-476e-a187-2b508697d0b4" width="250"/><br/>
+      <sub>푸터 화면</sub>
+    </td>
+  </tr>
+</table>
 
 ## 사용 기술 및 언어 ⚒️
 
