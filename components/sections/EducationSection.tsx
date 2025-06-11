@@ -2,9 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Education } from '@/lib/types';
-import { EducationCard } from '@/components/education/EducationCard';
+import { EducationCard } from '../education/EducationCard';
 import { useEffect, useState } from 'react';
-import { getEducations } from '@/lib/api';
+import { getEducations } from '@/lib/api/education';
 import EducationCardSkeleton from '@/components/education/EducationCardSkeleton';
 
 const containerVariants = {

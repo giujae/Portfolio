@@ -1,5 +1,5 @@
-import { supabase } from './supabase/client';
-import { Education } from './types';
+import { supabase } from '../supabase/client';
+import { Education } from '../types';
 
 export async function getEducations(): Promise<Education[]> {
     const { data, error } = await supabase.from('education').select('*').order('start_period', { ascending: false });
