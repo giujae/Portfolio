@@ -7,13 +7,10 @@ import { useEffect, useState } from 'react';
 export default function IntroSection() {
     const [phase, setPhase] = useState<0 | 1 | 2 | 3 | 4>(0);
 
-    useEffect(() => {
-        const timers = [
-            setTimeout(() => setPhase(1), 1000), // 1.5초 → 1초
-            setTimeout(() => setPhase(2), 1600), // 2.5초 → 1.6초
-            setTimeout(() => setPhase(3), 2200), // 3.5초 → 2.2초
-            setTimeout(() => setPhase(4), 2800), // 4.5초 → 2.8초
-        ];
+    const setupPhaseTimers = useCallback(() => {
+        const timers = PHASE_TIMINGS.map((timing, index) =>
+            setTimeout(() => setPhase((index + 1) as IntroPhase), timing)
+        );
         return () => timers.forEach(clearTimeout);
     }, []);
 
