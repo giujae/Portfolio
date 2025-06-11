@@ -3,9 +3,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
 
-import ProfileImage from './intro/ProfileImage';
-import SocialLinks from './intro/SocialLinks';
-import ScrollIndicator from './intro/ScrollIndicator';
+import ProfileImage from '@/components/intro/ProfileImage';
+import SocialLinks from '@/components/intro/SocialLinks';
+import ScrollIndicator from '@/components/intro/ScrollIndicator';
 import { IntroPhase } from '@/lib/types/intro';
 import { FRONT_END_OPACITY, INTRO_ANIMATION_CONFIG, PHASE_TIMINGS } from '@/lib/constants/animations';
 
