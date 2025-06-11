@@ -1,38 +1,37 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { Project } from '@/lib/api/projects';
+import { ProjectCardProps } from '@/lib/types/project';
 import ProjectModal from '@/components/project/ProjectModal';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, Github } from 'lucide-react';
-
-type ProjectCardProps = {
-    project: Project;
-};
+import ProjectActionButtons from '@/components/project/ProjectActionButtons';
 
 export default function ProjectCard({ project }: ProjectCardProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isActionsVisible, setIsActionsVisible] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
-                setIsActionsVisible(false);
-            }
+    const handleClickOutside = useCallback((event: MouseEvent) => {
+        if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+            setIsActionsVisible(false);
         }
+    }, []);
 
+    useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [handleClickOutside]);
 
-    const handleCardClick = (e: React.MouseEvent) => {
+    const handleCardClick = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
         setIsActionsVisible(true);
-    };
+    }, []);
+
+    const handleModalOpen = useCallback(() => {
+        setIsModalOpen(true);
+    }, []);
 
     return (
         <div
@@ -48,42 +47,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                         ${isActionsVisible ? 'opacity-100 md:opacity-0' : 'opacity-0'} 
                         md:group-hover:opacity-100`}
                 >
-                    <Button
-                        variant="secondary"
-                        className="hover:bg-zinc-300/80 cursor-pointer"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setIsModalOpen(true);
-                        }}
-                    >
-                        상세보기
-                    </Button>
-                    {project.repo_url && (
-                        <Button
-                            variant="secondary"
-                            className="hover:bg-zinc-300/80 cursor-pointer"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                window.open(project.repo_url, '_blank');
-                            }}
-                        >
-                            <Github className="w-4 h-4 mr-2" />
-                            GitHub
-                        </Button>
-                    )}
-                    {project.demo_url && (
-                        <Button
-                            variant="secondary"
-                            className="hover:bg-secondary/80 cursor-pointer"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                window.open(project.demo_url, '_blank');
-                            }}
-                        >
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                            Demo
-                        </Button>
-                    )}
+                    <ProjectActionButtons project={project} onModalOpen={handleModalOpen} />
                 </div>
             </div>
 
